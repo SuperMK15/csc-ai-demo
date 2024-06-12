@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react'
 import './App.css'
 import { CohereClient } from "cohere-ai";
-import { ChatMessage } from 'cohere-ai/api/index';
 import SyncLoader from "react-spinners/SyncLoader";
 
 function App() {
