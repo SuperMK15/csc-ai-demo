@@ -19,7 +19,8 @@ function App() {
     "## Style Guide\n" +
     "1. Be friendly and helpful\n" +
     "2. Use casual language\n" +
-    "3. Be concise\n";
+    "3. Be concise\n" +
+    "4. Use emojis when appropriate!\n";
 
   useEffect(() => {
     const setUpCohere = async () => {
