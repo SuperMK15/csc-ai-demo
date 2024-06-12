@@ -3,12 +3,18 @@
   flex-direction: column;
   height: 90vh;
   width: 50%;
-  margin: 0 auto;
+  margin: auto auto;
   padding: 20px;
   border: 1px solid #444;
   border-radius: 8px;
   background-color: #333;
   color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    width: 100%;
+  }
 }
 
 .chat-history {
