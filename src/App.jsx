@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 import './App.css'
 import { CohereClient } from "cohere-ai";
 import SyncLoader from "react-spinners/SyncLoader";
@@ -12,6 +12,14 @@ function App() {
   const [message, setMessage] = useState('');
 
   const cohere = new CohereClient({ token: import.meta.env.VITE_COHERE_API_KEY });
+  
+  const chatContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [history]); // Scroll to bottom whenever history changes
 
   const ai_preamble =
     "## Task & Context\n" +
@@ -79,7 +87,7 @@ function App() {
   return (
     <div className="app">
       <div className="chat-container">
-        <div className="chat-history">
+        <div className="chat-history" ref={chatContainerRef}>
           {history.map((msg, index) => (
             index === 0 ? null :
               (<div key={index} className={`chat-message ${msg.role}`}>
@@ -87,7 +95,7 @@ function App() {
               </div>)
           ))}
         </div>
-        <div className="chat-input-container">
+        <form className="chat-input-container">
           <input
             disabled={loading}
             type="text"
@@ -99,7 +107,7 @@ function App() {
             {loading ? <SyncLoader size={8} /> : 'Send'}
           </button>
           <button className='resetButton' onClick={() => setHistory(history.slice(0, 2))}>Clear Chat</button>
-        </div>
+        </form>
       </div>
     </div>
   )
